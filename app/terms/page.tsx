@@ -3,9 +3,17 @@ import Link from "next/link";
 import ProseLayout from "@/components/ProseLayout";
 
 export const metadata: Metadata = {
-  title: "Terms of Use — PrintReadyTools",
-  description:
-    "Terms of use for PrintReadyTools. Read our simple rules for using this free printable generator website.",
+  title: "Terms of Use",
+  description: "Terms of use for PrintReadyTools. Simple rules for using this free printable generator website.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms of Use — PrintReadyTools",
+    description: "Simple terms of use for PrintReadyTools.",
+    url: "/terms",
+    type: "website",
+  },
 };
 
 export default function TermsPage() {

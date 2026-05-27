@@ -3,9 +3,17 @@ import Link from "next/link";
 import ProseLayout from "@/components/ProseLayout";
 
 export const metadata: Metadata = {
-  title: "About PrintReadyTools — Free Printable Generators for Families",
-  description:
-    "PrintReadyTools is a free website where families, parents, and teachers can create and download printable PDFs — chore charts, meal planners, and more.",
+  title: "About PrintReadyTools",
+  description: "PrintReadyTools is a free website that helps parents, families, caregivers, and teachers create printable PDFs for everyday life. No sign-up required.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About PrintReadyTools",
+    description: "Free printable tools for busy families. No sign-up required. Learn more about PrintReadyTools.",
+    url: "/about",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

@@ -5,11 +5,20 @@ import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
 import ToolCard from "@/components/ToolCard";
 import MealPlannerGenerator from "@/components/meal-planner/MealPlannerGenerator";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Free Weekly Meal Planner — Printable PDF | PrintReadyTools",
-  description:
-    "Plan your family's meals for the week and download a clean printable PDF. Includes breakfast, lunch, dinner, and snacks for every day. No sign-up needed.",
+  title: "Free Weekly Meal Planner Printable",
+  description: "Plan breakfast, lunch, dinner, and snacks for the whole week. Add grocery notes and download a printable US Letter meal planner PDF. Free, no sign-up needed.",
+  alternates: {
+    canonical: "/weekly-meal-planner",
+  },
+  openGraph: {
+    title: "Free Weekly Meal Planner Printable",
+    description: "Plan your family's meals for the week and download a clean printable PDF. Includes breakfast, lunch, dinner, and snacks.",
+    url: "/weekly-meal-planner",
+    type: "website",
+  },
 };
 
 /* ── Related tool icons ──────────────────────────────────── */
@@ -99,6 +108,40 @@ const faqItems = [
 ];
 
 export default function WeeklyMealPlannerPage() {
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    "https://printreadytools.com";
+
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Free Weekly Meal Planner",
+    url: `${BASE_URL}/weekly-meal-planner`,
+    description:
+      "Plan breakfast, lunch, dinner, and snacks for the whole week. Add grocery notes and download a printable US Letter meal planner PDF.",
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    browserRequirements: "Requires a modern web browser",
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <Header />
@@ -293,6 +336,9 @@ export default function WeeklyMealPlannerPage() {
             </div>
           </div>
         </section>
+
+        <JsonLd data={webAppSchema} />
+        <JsonLd data={faqSchema} />
 
       </main>
 

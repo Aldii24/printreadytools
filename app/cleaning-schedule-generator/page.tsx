@@ -5,11 +5,20 @@ import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
 import ToolCard from "@/components/ToolCard";
 import CleaningScheduleGenerator from "@/components/cleaning-schedule/CleaningScheduleGenerator";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Free Cleaning Schedule Generator — Printable PDF | PrintReadyTools",
-  description:
-    "Create a custom cleaning schedule for your home. Add rooms, tasks, frequency, and assigned person, then download a printable US Letter PDF. No sign-up needed.",
+  title: "Free Cleaning Schedule Generator",
+  description: "Build a room-by-room cleaning schedule for your home. Add tasks, set frequency, assign to family members, and download a printable PDF. Free, no sign-up needed.",
+  alternates: {
+    canonical: "/cleaning-schedule-generator",
+  },
+  openGraph: {
+    title: "Free Cleaning Schedule Generator",
+    description: "Build a room-by-room cleaning schedule for your home and download a printable PDF — no account needed.",
+    url: "/cleaning-schedule-generator",
+    type: "website",
+  },
 };
 
 function IconChecklist() {
@@ -74,6 +83,13 @@ const relatedTools = [
     href: "/weekly-meal-planner",
     icon: <IconCalendar />,
     tag: "Meal Planning",
+  },
+  {
+    title: "Pet Feeding Schedule",
+    description: "Make a simple feeding and care log for dogs, cats, or any pet in the household.",
+    href: "/pet-feeding-schedule-printable",
+    icon: <IconPaw />,
+    tag: "Pets",
   },
 ];
 
@@ -143,6 +159,40 @@ const tips = [
 ];
 
 export default function CleaningScheduleGeneratorPage() {
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    "https://printreadytools.com";
+
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Free Cleaning Schedule Generator",
+    url: `${BASE_URL}/cleaning-schedule-generator`,
+    description:
+      "Build a room-by-room cleaning schedule for your home. Add tasks, set frequency, assign to family members, and download a printable PDF.",
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    browserRequirements: "Requires a modern web browser",
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <Header />
@@ -309,65 +359,12 @@ export default function CleaningScheduleGeneratorPage() {
               {relatedTools.map((tool) => (
                 <ToolCard key={tool.href} {...tool} />
               ))}
-              {/* Pet Feeding Schedule — coming soon */}
-              <article
-                aria-label="Pet Feeding Schedule — coming soon"
-                style={{
-                  backgroundColor: "#FDFCFA",
-                  border: "1px dashed #D8D2CA",
-                  borderRadius: "0.75rem",
-                  padding: "1.25rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  opacity: 0.82,
-                }}
-              >
-                <div
-                  className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg shrink-0"
-                  style={{ backgroundColor: "#F0ECE6", color: "#A8A29A" }}
-                  aria-hidden="true"
-                >
-                  <IconPaw />
-                </div>
-                <span
-                  className="mb-2 inline-block rounded px-2 py-0.5"
-                  style={{ backgroundColor: "#F0ECE6", color: "#A8A29A", fontSize: "0.75rem", fontWeight: 500 }}
-                >
-                  Pets
-                </span>
-                <h3
-                  className="mb-1 leading-snug"
-                  style={{ fontFamily: "var(--font-lora), Georgia, serif", color: "#6F665C", fontSize: "1rem", fontWeight: 600 }}
-                >
-                  Pet Feeding Schedule
-                </h3>
-                <p
-                  className="mb-4 flex-1 leading-relaxed"
-                  style={{ color: "#A8A29A", fontSize: "0.875rem" }}
-                >
-                  Make a simple feeding and care log for dogs, cats, or any pet in the household.
-                </p>
-                <span
-                  className="mt-auto self-start inline-flex items-center gap-1.5 rounded-md px-3 py-1.5"
-                  style={{
-                    backgroundColor: "#F0ECE6",
-                    color: "#A8A29A",
-                    fontSize: "0.8125rem",
-                    fontWeight: 500,
-                    fontFamily: "var(--font-inter), system-ui, sans-serif",
-                    border: "1px solid #D8D2CA",
-                  }}
-                >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.4" />
-                    <path d="M6 3.5v2.75l1.5 1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Coming soon
-                </span>
-              </article>
             </div>
           </div>
         </section>
+
+        <JsonLd data={webAppSchema} />
+        <JsonLd data={faqSchema} />
 
       </main>
 

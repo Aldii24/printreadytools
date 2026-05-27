@@ -3,9 +3,17 @@ import Link from "next/link";
 import ProseLayout from "@/components/ProseLayout";
 
 export const metadata: Metadata = {
-  title: "Contact — PrintReadyTools",
-  description:
-    "Get in touch with the PrintReadyTools team. We'd love to hear your feedback, suggestions, or questions.",
+  title: "Contact",
+  description: "Get in touch with the PrintReadyTools team. We read every message and reply within a few business days.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact PrintReadyTools",
+    description: "Get in touch with the PrintReadyTools team.",
+    url: "/contact",
+    type: "website",
+  },
 };
 
 export default function ContactPage() {

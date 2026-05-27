@@ -3,9 +3,17 @@ import Link from "next/link";
 import ProseLayout from "@/components/ProseLayout";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — PrintReadyTools",
-  description:
-    "PrintReadyTools privacy policy. Learn how we handle your information when you use our free printable generator tools.",
+  title: "Privacy Policy",
+  description: "PrintReadyTools privacy policy. Learn how we handle your information when you use our free printable generator tools.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy — PrintReadyTools",
+    description: "Learn how PrintReadyTools handles your information.",
+    url: "/privacy",
+    type: "website",
+  },
 };
 
 export default function PrivacyPage() {

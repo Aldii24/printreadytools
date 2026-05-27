@@ -15,9 +15,25 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PrintReadyTools — Free Printable Generators for Busy Families",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://printreadytools.com"),
+  title: {
+    template: "%s | PrintReadyTools",
+    default: "Free Printable Generators for Busy Families | PrintReadyTools",
+  },
   description:
-    "Create chore charts, meal planners, cleaning schedules, pet care logs, and more. Customize and download printable PDFs — no sign-up required.",
+    "Create chore charts, meal planners, medication trackers, cleaning schedules, pet feeding schedules, and more. Free printable PDFs — no sign-up required.",
+  openGraph: {
+    type: "website",
+    siteName: "PrintReadyTools",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

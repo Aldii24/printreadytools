@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
 import ToolCard from "@/components/ToolCard";
+import JsonLd from "@/components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Free Printable Generators for Busy Families | PrintReadyTools",
+  description: "Create chore charts, meal planners, cleaning schedules, medication trackers, pet feeding schedules, and more. Free printable PDFs — customize and download in under a minute. No sign-up required.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Free Printable Generators for Busy Families",
+    description: "Create chore charts, meal planners, cleaning schedules, medication trackers, pet feeding schedules, and more. Free printable PDFs — no sign-up required.",
+    url: "/",
+    type: "website",
+  },
+};
 
 /* ── Inline SVG icons (Lucide-inspired line style) ───────── */
 function IconChecklist() {
@@ -91,16 +107,16 @@ const liveTools = [
     icon: <IconBroom />,
     tag: "Family & Home",
   },
-];
-
-const comingTools = [
   {
     title: "Pet Feeding Schedule",
     description: "Make a simple feeding and care log for dogs, cats, or any pet in the household.",
+    href: "/pet-feeding-schedule-printable",
     icon: <IconPaw />,
     tag: "Pets",
   },
 ];
+
+const comingTools: { title: string; description: string; icon: React.ReactNode; tag?: string }[] = [];
 
 const benefits = [
   "No sign-up required",
@@ -140,6 +156,68 @@ const steps = [
 
 /* ── Page ────────────────────────────────────────────────── */
 export default function HomePage() {
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    "https://printreadytools.com";
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "PrintReadyTools",
+    url: BASE_URL,
+    description:
+      "Free printable generators for busy families. Create chore charts, meal planners, cleaning schedules, medication trackers, pet feeding schedules, and more.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${BASE_URL}/#tools`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Free Printable Generators",
+    description:
+      "Free printable PDF generators for families, caregivers, and teachers.",
+    numberOfItems: 5,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Chore Chart Generator",
+        url: `${BASE_URL}/chore-chart-generator`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Weekly Meal Planner",
+        url: `${BASE_URL}/weekly-meal-planner`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Medication Tracker Printable",
+        url: `${BASE_URL}/medication-tracker-printable`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Cleaning Schedule Generator",
+        url: `${BASE_URL}/cleaning-schedule-generator`,
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "Pet Feeding Schedule Printable",
+        url: `${BASE_URL}/pet-feeding-schedule-printable`,
+      },
+    ],
+  };
+
   return (
     <>
       <Header />
@@ -396,6 +474,9 @@ export default function HomePage() {
         >
           <AdSlot size="responsive" />
         </div>
+
+        <JsonLd data={websiteSchema} />
+        <JsonLd data={itemListSchema} />
 
       </main>
 

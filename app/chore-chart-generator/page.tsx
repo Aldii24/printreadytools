@@ -5,11 +5,20 @@ import Footer from "@/components/Footer";
 import AdSlot from "@/components/AdSlot";
 import ToolCard from "@/components/ToolCard";
 import ChoreChartGenerator from "@/components/chore-chart/ChoreChartGenerator";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Free Chore Chart Generator — Printable PDF | PrintReadyTools",
-  description:
-    "Create a custom chore chart for kids, teens, or the whole family. Choose chores, days, and rewards, then download a printable US Letter PDF. No sign-up needed.",
+  title: "Free Chore Chart Generator for Kids",
+  description: "Create a custom printable chore chart for kids, teens, or the whole family. Choose tasks, days, and rewards. Download a clean US Letter PDF — no sign-up needed.",
+  alternates: {
+    canonical: "/chore-chart-generator",
+  },
+  openGraph: {
+    title: "Free Chore Chart Generator for Kids",
+    description: "Create a custom printable chore chart for kids, teens, or the whole family. Download a clean PDF in under a minute.",
+    url: "/chore-chart-generator",
+    type: "website",
+  },
 };
 
 /* ── Related tool icons ──────────────────────────────────── */
@@ -98,6 +107,40 @@ const faqItems = [
 ];
 
 export default function ChoreChartGeneratorPage() {
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+    "https://printreadytools.com";
+
+  const webAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Free Chore Chart Generator",
+    url: `${BASE_URL}/chore-chart-generator`,
+    description:
+      "Create a custom printable chore chart for kids, teens, or the whole family. Choose tasks, days, and rewards. Download a clean US Letter PDF — no sign-up needed.",
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    browserRequirements: "Requires a modern web browser",
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <Header />
@@ -374,6 +417,9 @@ export default function ChoreChartGeneratorPage() {
             </div>
           </div>
         </section>
+
+        <JsonLd data={webAppSchema} />
+        <JsonLd data={faqSchema} />
 
       </main>
 
