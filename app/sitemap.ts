@@ -1,77 +1,80 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://printreadytools.com";
-
-// Build date used as lastModified for all static pages.
-// Generators are client-side tools so their content doesn't change server-side.
-const BUILT_AT = new Date();
+// Force dynamic evaluation so NEXT_PUBLIC_SITE_URL is read at
+// request time rather than being baked in at build time.
+export const dynamic = "force-dynamic";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl =
+    (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/\/$/, "") ||
+    "https://printreadytools.vercel.app";
+
+  // lastModified is computed here (inside the function) for the same reason.
+  const builtAt = new Date();
+
   return [
     // ── Homepage ──────────────────────────────────────────
     {
-      url: `${BASE_URL}/`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/`,
+      lastModified: builtAt,
       changeFrequency: "weekly",
       priority: 1.0,
     },
 
     // ── Printable generators ──────────────────────────────
     {
-      url: `${BASE_URL}/chore-chart-generator`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/chore-chart-generator`,
+      lastModified: builtAt,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/weekly-meal-planner`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/weekly-meal-planner`,
+      lastModified: builtAt,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/medication-tracker-printable`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/medication-tracker-printable`,
+      lastModified: builtAt,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/cleaning-schedule-generator`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/cleaning-schedule-generator`,
+      lastModified: builtAt,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/pet-feeding-schedule-printable`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/pet-feeding-schedule-printable`,
+      lastModified: builtAt,
       changeFrequency: "monthly",
       priority: 0.9,
     },
 
     // ── Support / legal pages ─────────────────────────────
     {
-      url: `${BASE_URL}/about`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/about`,
+      lastModified: builtAt,
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: `${BASE_URL}/contact`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/contact`,
+      lastModified: builtAt,
       changeFrequency: "yearly",
       priority: 0.4,
     },
     {
-      url: `${BASE_URL}/privacy`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/privacy`,
+      lastModified: builtAt,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
-      url: `${BASE_URL}/terms`,
-      lastModified: BUILT_AT,
+      url: `${baseUrl}/terms`,
+      lastModified: builtAt,
       changeFrequency: "yearly",
       priority: 0.3,
     },
