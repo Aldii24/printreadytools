@@ -52,14 +52,6 @@ function IconPaw() {
     </svg>
   );
 }
-function IconBook() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path d="M3 4a1 1 0 011-1h5a2 2 0 012 2v11a2 2 0 01-2-2H4a1 1 0 01-1-1V4z" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M17 4a1 1 0 00-1-1h-5a2 2 0 00-2 2v11a2 2 0 002-2h6a1 1 0 001-1V4z" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
 function IconCheck() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -70,48 +62,41 @@ function IconCheck() {
 }
 
 /* ── Tool list ───────────────────────────────────────────── */
-const tools = [
+const liveTools = [
   {
     title: "Chore Chart Generator",
-    description: "Build a custom chore chart for kids or the whole family. Choose tasks, days, and rewards.",
+    description: "Create a custom weekly chore chart for kids or the whole family.",
     href: "/chore-chart-generator",
     icon: <IconChecklist />,
     tag: "Kids & Chores",
   },
   {
     title: "Weekly Meal Planner",
-    description: "Plan seven days of dinners (and more) with a printable meal planning sheet.",
+    description: "Plan breakfast, lunch, dinner, snacks, and grocery notes for the week.",
     href: "/weekly-meal-planner",
     icon: <IconCalendar />,
     tag: "Meal Planning",
   },
+];
+
+const comingTools = [
   {
     title: "Medication Tracker",
     description: "Track daily medications, doses, and times for any family member or caregiver.",
-    href: "/medication-tracker-printable",
     icon: <IconPill />,
     tag: "Health",
   },
   {
     title: "Cleaning Schedule",
     description: "Create a daily, weekly, or monthly cleaning schedule tailored to your home.",
-    href: "/cleaning-schedule-generator",
     icon: <IconBroom />,
     tag: "Family & Home",
   },
   {
     title: "Pet Feeding Schedule",
     description: "Make a simple feeding and care log for dogs, cats, or any pet in the household.",
-    href: "/pet-feeding-schedule-printable",
     icon: <IconPaw />,
     tag: "Pets",
-  },
-  {
-    title: "Homework Planner",
-    description: "Help kids track assignments, due dates, and study goals with a printable planner.",
-    href: "/homework-planner",
-    icon: <IconBook />,
-    tag: "School",
   },
 ];
 
@@ -200,7 +185,7 @@ export default function HomePage() {
                   customized and ready to download as PDFs. No sign-up needed.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <Link href="/printables" className="btn-primary">
+                  <Link href="/#tools" className="btn-primary">
                     Browse Printable Tools
                   </Link>
                   <Link href="/chore-chart-generator" className="btn-secondary">
@@ -229,7 +214,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Popular Tools ─────────────────────────────────── */}
-        <section style={{ backgroundColor: "#FAF7F2", padding: "3.5rem 1rem" }}>
+        <section id="tools" style={{ backgroundColor: "#FAF7F2", padding: "3.5rem 1rem" }}>
           <div className="mx-auto max-w-6xl">
             <h2
               className="text-center"
@@ -249,8 +234,13 @@ export default function HomePage() {
               Pick a tool, fill in a few fields, download your PDF.
             </p>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {tools.map((tool) => (
+              {/* Live tools */}
+              {liveTools.map((tool) => (
                 <ToolCard key={tool.href} {...tool} />
+              ))}
+              {/* Coming-soon placeholders */}
+              {comingTools.map((tool) => (
+                <ComingSoonCard key={tool.title} {...tool} />
               ))}
             </div>
           </div>
@@ -391,7 +381,7 @@ export default function HomePage() {
               ))}
             </ol>
 
-            <Link href="/printables" className="btn-primary">
+            <Link href="/#tools" className="btn-primary">
               See all printable tools
             </Link>
           </div>
@@ -409,6 +399,101 @@ export default function HomePage() {
 
       <Footer />
     </>
+  );
+}
+
+/* ── Coming-soon card ────────────────────────────────────── */
+interface ComingSoonCardProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  tag?: string;
+}
+
+function ComingSoonCard({ title, description, icon, tag }: ComingSoonCardProps) {
+  return (
+    <article
+      aria-label={`${title} — coming soon`}
+      style={{
+        backgroundColor: "#FDFCFA",
+        border: "1px dashed #D8D2CA",
+        borderRadius: "0.75rem",
+        padding: "1.25rem",
+        display: "flex",
+        flexDirection: "column",
+        opacity: 0.82,
+      }}
+    >
+      {/* Icon */}
+      <div
+        className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg shrink-0"
+        style={{ backgroundColor: "#F0ECE6", color: "#A8A29A" }}
+        aria-hidden="true"
+      >
+        {icon}
+      </div>
+
+      {/* Tag */}
+      {tag && (
+        <span
+          className="mb-2 inline-block rounded px-2 py-0.5"
+          style={{
+            backgroundColor: "#F0ECE6",
+            color: "#A8A29A",
+            fontSize: "0.75rem",
+            fontWeight: 500,
+          }}
+        >
+          {tag}
+        </span>
+      )}
+
+      {/* Title */}
+      <h3
+        className="mb-1 leading-snug"
+        style={{
+          fontFamily: "var(--font-lora), Georgia, serif",
+          color: "#6F665C",
+          fontSize: "1rem",
+          fontWeight: 600,
+        }}
+      >
+        {title}
+      </h3>
+
+      {/* Description */}
+      <p
+        className="mb-4 flex-1 leading-relaxed"
+        style={{ color: "#A8A29A", fontSize: "0.875rem" }}
+      >
+        {description}
+      </p>
+
+      {/* Coming-soon badge */}
+      <span
+        className="mt-auto self-start inline-flex items-center gap-1.5 rounded-md px-3 py-1.5"
+        style={{
+          backgroundColor: "#F0ECE6",
+          color: "#A8A29A",
+          fontSize: "0.8125rem",
+          fontWeight: 500,
+          fontFamily: "var(--font-inter), system-ui, sans-serif",
+          border: "1px solid #D8D2CA",
+        }}
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.4" />
+          <path d="M6 3.5v2.75l1.5 1" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Coming soon
+      </span>
+    </article>
   );
 }
 
