@@ -77,15 +77,16 @@ const liveTools = [
     icon: <IconCalendar />,
     tag: "Meal Planning",
   },
-];
-
-const comingTools = [
   {
     title: "Medication Tracker",
     description: "Track daily medications, doses, and times for any family member or caregiver.",
+    href: "/medication-tracker-printable",
     icon: <IconPill />,
     tag: "Health",
   },
+];
+
+const comingTools = [
   {
     title: "Cleaning Schedule",
     description: "Create a daily, weekly, or monthly cleaning schedule tailored to your home.",
