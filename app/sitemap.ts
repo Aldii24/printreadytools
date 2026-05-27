@@ -66,6 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/medication-tracker-for-caregivers`,
+      lastModified: builtAt,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     // ── Support / legal pages ─────────────────────────────
     {
