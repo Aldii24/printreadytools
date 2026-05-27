@@ -84,15 +84,16 @@ const liveTools = [
     icon: <IconPill />,
     tag: "Health",
   },
-];
-
-const comingTools = [
   {
     title: "Cleaning Schedule",
     description: "Create a daily, weekly, or monthly cleaning schedule tailored to your home.",
+    href: "/cleaning-schedule-generator",
     icon: <IconBroom />,
     tag: "Family & Home",
   },
+];
+
+const comingTools = [
   {
     title: "Pet Feeding Schedule",
     description: "Make a simple feeding and care log for dogs, cats, or any pet in the household.",

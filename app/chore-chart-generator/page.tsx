@@ -31,11 +31,11 @@ function IconBroom() {
     </svg>
   );
 }
-function IconBook() {
+function IconPill() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path d="M3 4a1 1 0 011-1h5a2 2 0 012 2v11a2 2 0 01-2-2H4a1 1 0 01-1-1V4z" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M17 4a1 1 0 00-1-1h-5a2 2 0 00-2 2v11a2 2 0 002-2h6a1 1 0 001-1V4z" stroke="currentColor" strokeWidth="1.6" />
+      <rect x="5" y="3" width="10" height="14" rx="5" stroke="currentColor" strokeWidth="1.6" />
+      <line x1="5" y1="10" x2="15" y2="10" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -49,11 +49,11 @@ const relatedTools = [
     tag: "Family & Home",
   },
   {
-    title: "Homework Planner",
-    description: "Help kids track assignments, due dates, and study goals.",
-    href: "/homework-planner",
-    icon: <IconBook />,
-    tag: "School",
+    title: "Medication Tracker",
+    description: "Track daily medications, doses, and times for any family member or caregiver.",
+    href: "/medication-tracker-printable",
+    icon: <IconPill />,
+    tag: "Health",
   },
   {
     title: "Weekly Meal Planner",

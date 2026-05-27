@@ -31,14 +31,12 @@ function IconBroom() {
     </svg>
   );
 }
-function IconPaw() {
+
+function IconPill() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="10" cy="11" r="4" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="5" cy="6" r="1.5" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="15" cy="6" r="1.5" stroke="currentColor" strokeWidth="1.4" />
-      <circle cx="7" cy="4" r="1.2" stroke="currentColor" strokeWidth="1.3" />
-      <circle cx="13" cy="4" r="1.2" stroke="currentColor" strokeWidth="1.3" />
+      <rect x="5" y="3" width="10" height="14" rx="5" stroke="currentColor" strokeWidth="1.6" />
+      <line x1="5" y1="10" x2="15" y2="10" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -59,11 +57,11 @@ const relatedTools = [
     tag: "Family & Home",
   },
   {
-    title: "Pet Feeding Schedule",
-    description: "Make a simple feeding and care log for your pets.",
-    href: "/pet-feeding-schedule-printable",
-    icon: <IconPaw />,
-    tag: "Pets",
+    title: "Medication Tracker",
+    description: "Track daily medications, doses, and times for any family member or caregiver.",
+    href: "/medication-tracker-printable",
+    icon: <IconPill />,
+    tag: "Health",
   },
 ];
 
